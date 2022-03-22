@@ -16,7 +16,7 @@ A collection of Docker-Compose YAMLs for quick and easy container deployment.
 - Portainer
 - Uptime-Kuma
 - Vaultwarden
-- Wordpress Boilerplate
+- Wordpress
 
 ## How do I use them?
 
