@@ -15,6 +15,7 @@ services:
 
 volumes:
   data:
+    name: gotify_data
 
 networks:
   gotify:

@@ -70,6 +70,7 @@ services:
 
 volumes:
   html:
+    name: nextcloud_html
   data:
     name: nextcloud_data
   mariadb:
