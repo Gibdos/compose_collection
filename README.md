@@ -12,6 +12,7 @@ A collection of Docker-Compose YAMLs for quick and easy container deployment.
 - jsWiki
 - Meshcentral
 - Nextcloud with Collabora Code
+- NGINX Proxy Manager
 - Portainer
 - Uptime-Kuma
 - Vaultwarden
