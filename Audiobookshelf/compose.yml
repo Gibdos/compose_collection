@@ -13,8 +13,11 @@ services:
 
 volumes:
   books:
+    name: audiobooks_books
   metadata:
+    name: audiobooks_metadata
   config:
+    name: audiobooks_config
 
 networks:
   audiobookshelf:
