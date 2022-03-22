@@ -1,5 +1,11 @@
 # MeshCentral
 
+## What is MeshCentral?
+
+MeshCentral is a remote support / remote agent application (like TeamViewer or AnyDesk) to
+a) manage your computers remotely through an agent
+b) offer quick remote support to customers with a customizable assistant
+
 ## Websites
 
 - [MeshCentral Website](https://meshcentral.com/info/)
