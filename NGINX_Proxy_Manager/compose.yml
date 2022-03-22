@@ -1,0 +1,24 @@
+services:
+  nginxpm:
+    image: "jc21/nginx-proxy-manager:latest"
+    container_name: nginxpm
+    restart: unless-stopped
+    networks:
+      - nginxpm
+    ports:
+      - "80:80"
+      - "81:81"
+      - "443:443"
+    volumes:
+      - data:/data
+      - letsencrypt:/etc/letsencrypt
+
+volumes:
+  data:
+    name: nginxpm_data
+  letsencrypt:
+    name: nginxpm_ssl
+
+networks:
+  nginxpm:
+    name: nginxpm
