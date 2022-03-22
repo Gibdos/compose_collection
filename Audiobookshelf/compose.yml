@@ -1,0 +1,21 @@
+services:
+  audiobookshelf:
+    container_name: audiobookshelf
+    image: advplyr/audiobookshelf
+    ports:
+      - "8009:80"
+    volumes:
+      - books:/audiobooks
+      - metadata:/metadata
+      - config:/config
+    networks:
+      - audiobookshelf
+
+volumes:
+  books:
+  metadata:
+  config:
+
+networks:
+  audiobookshelf:
+    name: audiobookshelf

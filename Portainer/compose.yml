@@ -1,0 +1,21 @@
+services:
+  portainer:
+    ports:
+      - "8000:8000"
+      - "9090:9000"
+      - "9443:9443"
+    container_name: portainer
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    image: "portainer/portainer-ee:latest" # use portainer/portainer-ce for the free community edition
+    networks:
+      - portainer
+
+volumes:
+  portainer_data:
+    name: portainer_data
+networks:
+  portainer:
+    name: portainer

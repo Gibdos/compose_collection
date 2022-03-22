@@ -1,0 +1,42 @@
+services:
+  db:
+    container_name: ${COMPOSE_PROJECT_NAME}_db
+    image: mariadb
+    volumes:
+      - db:/var/lib/mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    networks:
+      - WP
+
+  wordpress:
+    depends_on:
+      - db
+    container_name: ${COMPOSE_PROJECT_NAME}_wp
+    image: wordpress
+    volumes:
+      - wp:/var/www/html
+    ports:
+      - "8502:80"
+    restart: unless-stopped
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+      WORDPRESS_DB_NAME: wordpress
+    networks:
+      - WP
+
+networks:
+  WP:
+    name: "${COMPOSE_PROJECT_NAME}"
+
+volumes:
+  db:
+    name: "${COMPOSE_PROJECT_NAME}_db"
+  wp:
+    name: "${COMPOSE_PROJECT_NAME}_wp"

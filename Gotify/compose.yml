@@ -1,0 +1,21 @@
+services:
+  gotify:
+    image: gotify/server
+    container_name: gotify
+    ports:
+      - "8005:80"
+    environment:
+      - TZ="Europe/Berlin"
+      - GOTIFY_DEFAULTUSER_PASS=SuperSafePassword123
+    volumes:
+      - data:/app/data
+    restart: unless-stopped
+    networks:
+      - gotify
+
+volumes:
+  data:
+
+networks:
+  gotify:
+    name: gotify

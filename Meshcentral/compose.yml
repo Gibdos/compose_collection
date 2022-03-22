@@ -1,0 +1,30 @@
+version: "3"
+services:
+  meshcentral:
+    restart: always
+    container_name: meshcentral
+    image: typhonragewind/meshcentral
+    ports:
+      - 8006:4430
+    environment:
+      - HOSTNAME=mesh.example.com
+      - REVERSE_PROXY=127.0.0.1
+      - REVERSE_PROXY_TLS_PORT=443
+      - IFRAME=false
+      - ALLOW_NEW_ACCOUNTS=false
+      - WEBRTC=true
+    volumes:
+      - data:/opt/meshcentral/meshcentral-data
+      - user_files:/opt/meshcentral/meshcentral-files
+    networks:
+      - meshcentral
+
+volumes:
+  data:
+    name: meshecentral_data
+  user_files:
+    name: meshecentral_user_files
+
+networks:
+  meshcentral:
+    name: meshcentral

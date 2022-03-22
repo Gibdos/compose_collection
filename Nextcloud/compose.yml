@@ -1,0 +1,82 @@
+services:
+  nextcloud:
+    image: nextcloud
+    container_name: nextcloud
+    networks:
+      - nextcloud
+    ports:
+      - "8002:80"
+    volumes:
+      - html:/var/www/html
+      - data:/srv/nextcloud/data
+    extra_hosts:
+      - "${NEXTCLOUD_FQDN}:${NEXTCLOUD_IPADDRESS}"
+      - "${COLLABORA_FQDN}:${NEXTCLOUD_IPADDRESS}"
+    depends_on:
+      - mariadb
+      - redis
+    environment:
+      - NEXTCLOUD_TRUSTED_DOMAINS='${NEXTCLOUD_FQDN}'
+      - NEXTCLOUD_DATA_DIR=/srv/nextcloud/data
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_HOST=nextcloud-mariadb
+      - REDIS_HOST=nextcloud-redis
+    restart: unless-stopped
+
+  mariadb:
+    image: mariadb
+    container_name: nextcloud-mariadb
+    restart: unless-stopped
+    volumes:
+      - mariadb:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+    networks:
+      - nextcloud
+    command: --innodb_read_only_compressed=OFF --transaction-isolation=READ-COMMITTED --log-bin=nextcloud-bin --binlog-format=ROW
+
+  redis:
+    image: redis
+    container_name: nextcloud-redis
+    volumes:
+      - redis:/data
+    networks:
+      - nextcloud
+    restart: unless-stopped
+
+  collabora:
+    image: collabora/code
+    container_name: nextcloud-collabora
+    restart: unless-stopped
+    networks:
+      - nextcloud
+    ports:
+      - "8003:9980"
+    extra_hosts:
+      - "${NEXTCLOUD_FQDN}:${NEXTCLOUD_IPADDRESS}"
+      - "${COLLABORA_FQDN}:${NEXTCLOUD_IPADDRESS}"
+    environment:
+      - "domain=${NEXTCLOUD_FQDN}"
+      - "dictionaries=en"
+      - "server_name=office.yousefi.de"
+    cap_add:
+      - MKNOD
+    tty: true
+
+volumes:
+  html:
+  data:
+    name: nextcloud_data
+  mariadb:
+    name: nextcloud_mariadb
+  redis:
+    name: nextcloud_redis
+
+networks:
+  nextcloud:
+    name: nextcloud
