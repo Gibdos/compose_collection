@@ -19,3 +19,10 @@ Collaboa Code is a hosted office suite based on LibreOffice, which integrates wi
 - [Collabora Repo](https://github.com/CollaboraOnline/)
 
 ## Notes
+
+- Be sure to run the nextcloud maintenance via
+  ```bash
+  crontab -e
+  */5 * * * * docker exec -u www-data nextcloud php cron.php
+  ```
+  This will run the maintenance every 5 minutes
