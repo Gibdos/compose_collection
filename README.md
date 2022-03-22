@@ -34,4 +34,4 @@ All compose.yml have been tested with
 
 - docker-compose version 1.29.2, build 5becea4c
 - docker version 20.10.13, build a224086
-- on Ubuntu Server 20.04.4 LTS with Kernel 5.13.0-35-generic
+- on Ubuntu Server 20.04.4 x86_64 LTS with Kernel 5.13.0-35-generic
