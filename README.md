@@ -1,12 +1,12 @@
 # Docker-Compose Collection
 
-- Wordpress with MariaDB
+- Wordpress Boilerplate
 - jsWiki
-- audiobookshelf
-- gotify
-- grafana
-- meshcentral
-- portainer
-- uptime-kuma
-- vaultwarden
-- nextcloud
+- Audiobookshelf
+- Gotify
+- Grafana
+- Meshcentral
+- Portainer
+- Uptime-Kuma
+- Vaultwarden
+- Nextcloud with Collabora Code
