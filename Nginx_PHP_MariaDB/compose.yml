@@ -1,0 +1,34 @@
+services:
+  quickSrv:
+    image: lscr.io/linuxserver/nginx
+    container_name: quickSrv
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Berlin
+    volumes:
+      - /home/USER/quickSRV/quickHTML/:/config
+    ports:
+      - "8999:80"
+    restart: unless-stopped
+    depends_on:
+      - quickDB
+    networks:
+      - quickSrv
+
+  quickDB:
+    image: mariadb
+    container_name: quickDB
+    volumes:
+      - /home/USER/quickSRV/quickDB:/var/lib/mysql
+    networks:
+      - quickSrv
+    restart: unless-stopped
+    environment:
+      - MARIADB_USER=quickDB
+      - MARIADB_PASSWORD=SuperSafePasswod123
+      - MARIADB_ROOT_PASSWORD=EvenSaferPassword123
+
+networks:
+  quickSrv:
+    name: quickSrv
